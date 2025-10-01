@@ -63,7 +63,7 @@ func copyGameAssetFiles(sourcePath, destPath string) error {
 		return fmt.Errorf("error reading file %s: %v", sourcePath, err)
 	}
 
-	err = os.WriteFile(destPath, data, 0644)
+	err = os.WriteFile(destPath, data, 0755)
 	if err != nil {
 		return fmt.Errorf("error writing file %s: %v", destPath, err)
 	}
@@ -140,7 +140,7 @@ func copyTemplate(targetDir string) {
 		data = []byte(strings.ReplaceAll(string(data), "{wxAppId}", *appId))
 
 		targetPath := filepath.Join(targetDir, file)
-		err = os.WriteFile(targetPath, data, 0644)
+		err = os.WriteFile(targetPath, data, 0755)
 		if err != nil {
 			fmt.Printf(Red+"Error writing file %s: %v\n"+Reset, targetPath, err)
 			continue
@@ -215,14 +215,14 @@ func modifyWasmJS(sourceDir, targetDir string) {
 		// Perform text replacements
 		newContent := string(content)
 		newContent = strings.ReplaceAll(newContent, "var DMSYS", "GameGlobal.DMSYS")
-		newContent = strings.ReplaceAll(newContent, "var FS", "GameGlobal.FS")
+		newContent = strings.ReplaceAll(newContent, "var FS=", "GameGlobal.FS=")
 		newContent = strings.ReplaceAll(newContent, "var Module=typeof Module!=\"undefined\"?Module:{};", "var Module=GameGlobal.Module;")
 
 		// Get filename
 		filename := filepath.Base(file)
 		// Write to target directory
 		targetPath := filepath.Join(targetDir, filename)
-		err = os.WriteFile(targetPath, []byte(newContent), 0644)
+		err = os.WriteFile(targetPath, []byte(newContent), 0755)
 		if err != nil {
 			fmt.Printf(Red+"Error writing file %s: %v\n"+Reset, targetPath, err)
 			continue
@@ -399,7 +399,7 @@ func modifyArchiveJSON(sourceDir, targetDir string) {
 		return
 	}
 
-	err = os.WriteFile(targetJSONFilePath, modifiedData, 0644)
+	err = os.WriteFile(targetJSONFilePath, modifiedData, 0755)
 	if err != nil {
 		fmt.Printf(Red+"Error writing target archive_files.json file: %v\n"+Reset, err)
 		return

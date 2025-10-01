@@ -884,8 +884,8 @@ var ProgressUpdater = {
 /* ********************************************************************* */
 
 Module = {
-    engineVersion: "1.10.4",
-    engineSdkSha1: "1aafd0a262ff40214ed7f51302d92fa587c607ef",
+    engineVersion: "1.11.0",
+    engineSdkSha1: "7c81792859a6da7f7401c0ac37a4cc83bb500ff6",
     noInitialRun: true,
 
     _filesToPreload: [],
