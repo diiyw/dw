@@ -48,7 +48,7 @@ var CUSTOM_PARAMETERS = {
         return ("archive" + path + "");
     },
     engine_arguments: ["--verify-graphics-calls=false",],
-    custom_heap_size: 268435456,
+    custom_heap_size: 134217728,
     full_screen_container: "#canvas-container",
     disable_context_menu: true,
     retry_time: 1.0,
@@ -72,6 +72,10 @@ var CUSTOM_PARAMETERS = {
         var prevInnerWidth = -1;
         var prevInnerHeight = -1;
 
+        buttonHeight = 42;
+
+
+        buttonHeight = 42;
 
         // Hack for iOS when exit from Fullscreen mode
         if (is_iOS) {
@@ -92,26 +96,10 @@ var CUSTOM_PARAMETERS = {
         var targetRatio = width / height;
         var actualRatio = innerWidth / innerHeight;
 
-        //Downscale fit
-        if (innerWidth < width || innerHeight < height) {
-            if (actualRatio > targetRatio) {
-                width = innerHeight * targetRatio;
-                height = innerHeight;
-                app_container.style.marginLeft = ((innerWidth - width) / 2) + "px";
-                app_container.style.marginTop = "0px";
-            }
-            else {
-                width = innerWidth;
-                height = innerWidth / targetRatio;
-                app_container.style.marginLeft = "0px";
-                app_container.style.marginTop = ((innerHeight - height) / 2) + "px";
-            }
-        }
-        else {
-            app_container.style.marginLeft = ((innerWidth - width) / 2) + "px";
-            app_container.style.marginTop = ((innerHeight - height) / 2) + "px";
-        }
 
+        //Stretch
+        width = innerWidth;
+        height = innerHeight;
 
 
 
@@ -231,9 +219,9 @@ var FileLoader = {
 var EngineLoader = {
     arc_sha1: "",
     wasm_sha1: "",
-    wasm_size: 3079880,
+    wasm_size: 2536605,
     wasmjs_sha1: "",
-    wasmjs_size: 283376,
+    wasmjs_size: 273436,
     wasm_pthread_sha1: "",
     wasm_pthread_size: 2000000,
     wasmjs_pthread_sha1: "",
@@ -883,9 +871,9 @@ var ProgressUpdater = {
 /* Module is Emscripten namespace                                        */
 /* ********************************************************************* */
 
-Module = {
-    engineVersion: "1.11.0",
-    engineSdkSha1: "7c81792859a6da7f7401c0ac37a4cc83bb500ff6",
+var Module = {
+    engineVersion: "1.11.1",
+    engineSdkSha1: "1ba9e1aa422166864c3267f03f5110144b745c1e",
     noInitialRun: true,
 
     _filesToPreload: [],
