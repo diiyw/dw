@@ -12,7 +12,7 @@ Export Defold bundle to WeApp Mini Games.
 - Exculate the shell from your terminal.
 
 ```bash
-dw -source defold_wasm_built_dir -target the_weeapp_dir -appid 12312fsa123ss
+dw -source defold_wasm_built_dir -target the_weeapp_dir -appid weappid
 ```
 Example:
 ```bash
