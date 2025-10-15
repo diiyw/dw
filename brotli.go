@@ -1,15 +1,14 @@
 package main
 
 import (
-	"bytes"
-	"io"
-
-	"github.com/google/brotli/go/cbrotli"
+    "bytes"
+    "io"
+    "github.com/andybalholm/brotli"
 )
 
 func compressBrotli(data []byte, quality int) ([]byte, error) {
 	var buf bytes.Buffer
-	writer := cbrotli.NewWriter(&buf, cbrotli.WriterOptions{Quality: quality})
+	writer := brotli.NewWriterLevel(&buf, quality)
 	_, err := writer.Write(data)
 	if err != nil {
 		return nil, err
@@ -22,7 +21,7 @@ func compressBrotli(data []byte, quality int) ([]byte, error) {
 }
 
 func decompressBrotli(data []byte) ([]byte, error) {
-	reader := cbrotli.NewReader(bytes.NewReader(data))
+	reader := brotli.NewReader(bytes.NewReader(data))
 	var buf bytes.Buffer
 	_, err := io.Copy(&buf, reader)
 	if err != nil {
